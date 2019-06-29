@@ -9,6 +9,10 @@ namespace App;
  * into a JSON object.
  * 
  * Fraser Provan <github.com/FraserProvan2>
+ * 
+ * Usage
+ * Call static method get_player_stats to fetch player stats
+ * e.g. OSRS_player_stats::get_player_stats('AccountUsername')
  */
 
 class OSRS_player_stats {
@@ -27,7 +31,10 @@ class OSRS_player_stats {
         // catch if player doesnt exist
         if (!$fetched_stats) {
             return array(
-                'message' => 'Player ' . $username . ' not found.'
+                'status' => 'error',
+                'body' => [
+                    'message' => 'Player ' . $username . ' not found.'
+                ]
             );
         } else {
             //process fetched stats
@@ -35,8 +42,11 @@ class OSRS_player_stats {
         }
 
         return array(
-            'username' => $username,
-            'stats' => $player_stats,
+            'status' => 'success',
+            'body' => [
+                'username' => $username,
+                'stats' => $player_stats,
+            ]
         );
     }
 

@@ -20,7 +20,9 @@ class MainController extends Controller
     public function get_player_stats($username)
     {
         // search DB first
-
+            // add player to db if not checked exists
+        
+        
         return OSRS_player_stats::get_player_stats($username);
     }
 

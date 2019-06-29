@@ -11,39 +11,37 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="container">
+        <div id="app">
+            <div class="container">
 
-            <h3 class="mt-4 text-center">OSRS Account Look Up</h3>
+                <h3 class="mt-4 text-center">OSRS Account Look Up</h3>
 
-            <div class="row">
+                <div class="row">
 
-                {{-- Player Look Up --}}
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-header">Account Look Up</div>
-        
-                        <div class="card-body">
-                            
-                            @dump($player_stats)
-        
+                    {{-- Player Look Up --}}
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">Account Look Up</div>
+                            <div class="card-body">
+                                {{-- @dump($player_stats) --}}
+                                <account-look-up></account-look-up>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {{-- Recent Searches --}}
-                <div class="col-md-3">
-                    <div class="card h-100">
-                        <div class="card-header">Recent Searches</div>
-        
-                        <div class="card-body">
-            
-        
-                            //
+                    {{-- Recent Searches --}}
+                    <div class="col-md-3">
+                        <div class="card h-100">
+                            <div class="card-header">Recent Searches</div>
+                            <div class="card-body">
+                                //
+                            </div>
                         </div>
                     </div>
+                    
                 </div>
-                
             </div>
+
         </div>
     </body>
 </html>
