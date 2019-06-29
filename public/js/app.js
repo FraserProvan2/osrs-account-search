@@ -1725,6 +1725,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1742,12 +1754,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.reset_errors();
       axios.get("/player_stats/" + this.account_name).then(function (response) {
-        console.log(response);
-
         if (response.data.status == "success") {
-          _this.player_stats = response.data.body;
+          return _this.player_stats = response.data.body;
         } else if (response.data.status == "error") {
-          _this.error = response.data.body.message;
+          return _this.error = response.data.body.message;
         }
       })["catch"](function (error) {
         return _this.error = "Something went wrong";
@@ -37098,23 +37108,53 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("strong", [_vm._v("Oh snap!")]),
-          _vm._v(" " + _vm._s(this.error) + ".\n    ")
+          _vm._v("\n    " + _vm._s(this.error) + ".\n  ")
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm._m(0)
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        this.player_stats
+          ? _c(
+              "ul",
+              { staticClass: "list-group" },
+              _vm._l(this.player_stats.stats, function(stat, index) {
+                return _c(
+                  "div",
+                  { key: index, staticClass: "border-primary stat-block" },
+                  [
+                    index != "Overall"
+                      ? _c(
+                          "li",
+                          {
+                            staticClass:
+                              "list-group-item d-flex justify-content-between align-items-center"
+                          },
+                          [
+                            _vm._v(
+                              "\n                  " + _vm._s(index) + " "
+                            ),
+                            _c(
+                              "button",
+                              { staticClass: "badge badge-primary badge-pill" },
+                              [_vm._v(_vm._s(stat.Level))]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]
+                )
+              }),
+              0
+            )
+          : _vm._e()
+      ])
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

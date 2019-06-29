@@ -14,7 +14,10 @@
         <div id="app">
             <div class="container">
 
-                <h3 class="mt-4 text-center">OSRS Account Look Up</h3>
+                <div class="py-2 mt-2">
+
+                    <h3 class="text-center">OSRS Account Look Up</h3>
+                </div>
 
                 <div class="row">
 

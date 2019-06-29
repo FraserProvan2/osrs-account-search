@@ -33,7 +33,7 @@ class OSRS_player_stats {
             return array(
                 'status' => 'error',
                 'body' => [
-                    'message' => 'Player ' . $username . ' not found.'
+                    'message' => 'Player ' . $username . ' not found'
                 ]
             );
         } else {
