@@ -1736,7 +1736,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37112,46 +37111,54 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        this.player_stats
-          ? _c(
-              "ul",
-              { staticClass: "list-group" },
-              _vm._l(this.player_stats.stats, function(stat, index) {
-                return _c(
-                  "div",
-                  { key: index, staticClass: "border-primary stat-block" },
-                  [
-                    index != "Overall"
-                      ? _c(
-                          "li",
-                          {
-                            staticClass:
-                              "list-group-item d-flex justify-content-between align-items-center"
-                          },
-                          [
-                            _vm._v(
-                              "\n                  " + _vm._s(index) + " "
-                            ),
-                            _c(
-                              "button",
-                              { staticClass: "badge badge-primary badge-pill" },
-                              [_vm._v(_vm._s(stat.Level))]
+    this.player_stats.stats
+      ? _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            this.player_stats.stats
+              ? _c(
+                  "ul",
+                  { staticClass: "list-group" },
+                  _vm._l(this.player_stats.stats, function(stat, index) {
+                    return _c(
+                      "div",
+                      { key: index, staticClass: "border-primary stat-block" },
+                      [
+                        index != "Overall"
+                          ? _c(
+                              "li",
+                              {
+                                staticClass:
+                                  "list-group-item d-flex justify-content-between align-items-center border-primary py-1",
+                                staticStyle: {
+                                  "border-color": "#5B6972!important"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n              " + _vm._s(index) + " "
+                                ),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "badge badge-primary badge-pill"
+                                  },
+                                  [_vm._v(_vm._s(stat.Level))]
+                                )
+                              ]
                             )
-                          ]
-                        )
-                      : _vm._e()
-                  ]
+                          : _vm._e()
+                      ]
+                    )
+                  }),
+                  0
                 )
-              }),
-              0
-            )
-          : _vm._e()
-      ])
-    ])
+              : _vm._e()
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

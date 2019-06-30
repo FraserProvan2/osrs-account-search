@@ -18,22 +18,21 @@
     </div>
 
     <!-- Stats -->
-    <div class="row">
+    
+    <div v-if="this.player_stats.stats" class="row">
         <div class="col-md-6">
+            
+        </div>
+        <div class="col-md-6">
+            <ul v-if="this.player_stats.stats" class="list-group">
+            <div v-for="(stat, index) in this.player_stats.stats" :key="index" class="border-primary stat-block">
+                <li v-if="index != 'Overall'" class="list-group-item d-flex justify-content-between align-items-center border-primary py-1" style="border-color:#5B6972!important">
+                {{ index }} <button class="badge badge-primary badge-pill">{{ stat.Level }}</button>
+                </li>
+            </div>
+        </ul> 
+        </div>
 
-        </div>
-        <div class="col-md-6">
-            <ul v-if="this.player_stats" class="list-group">
-                <div v-for="(stat, index) in this.player_stats.stats" :key="index" class="border-primary stat-block">
-                    <!-- {{ stat.Rank }}
-                    {{ stat.XP }} -->
-                    
-                    <li v-if="index != 'Overall'" class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ index }} <button class="badge badge-primary badge-pill">{{ stat.Level }}</button>
-                    </li>
-                </div>
-            </ul> 
-        </div>
     </div>
   </div>
 </template>
