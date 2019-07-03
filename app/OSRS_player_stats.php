@@ -37,15 +37,23 @@ class OSRS_player_stats {
                 ]
             );
         } else {
-            //process fetched stats
-            $player_stats = OSRS_player_stats::process_stats($fetched_stats);
+            // process fetched stats
+            $player_stats = (array) OSRS_player_stats::process_stats($fetched_stats);
+            
+            // structure for JS data objects
+            $player_stats_A = array_splice($player_stats, 1, 12);
+            $player_stats_B = array_splice($player_stats, 1);
+            $overall = $player_stats['Overall'];
         }
 
         return array(
             'status' => 'success',
             'body' => [
                 'username' => $username,
-                'stats' => $player_stats,
+                'stats' => [
+                    'player_stats' => [$player_stats_A,$player_stats_B],
+                    'overall' => $overall
+                ],
             ]
         );
     }

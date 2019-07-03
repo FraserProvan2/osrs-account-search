@@ -17,23 +17,18 @@
       {{ this.error }}.
     </div>
 
-    <!-- Stats -->
-    
-    <div v-if="this.player_stats.stats" class="row">
-        <div class="col-md-6">
-            
-        </div>
-        <div class="col-md-6">
-            <ul v-if="this.player_stats.stats" class="list-group">
-            <div v-for="(stat, index) in this.player_stats.stats" :key="index" class="border-primary stat-block">
-                <li v-if="index != 'Overall'" class="list-group-item d-flex justify-content-between align-items-center border-primary py-1" style="border-color:#5B6972!important">
-                {{ index }} <button class="badge badge-primary badge-pill">{{ stat.Level }}</button>
-                </li>
-            </div>
-        </ul> 
-        </div>
+    <!-- Overll -->
 
+    <!-- Stats -->
+    <div v-if="this.player_stats_a && this.player_stats_b" class="row">
+        <div class="col-md-6">
+            <stats-list :player_data="player_stats_a"></stats-list>
+        </div>
+        <div class="col-md-6">
+            <stats-list :player_data="player_stats_b"></stats-list>
+        </div>
     </div>
+    
   </div>
 </template>
 
@@ -41,7 +36,9 @@
 export default {
   data() {
     return {
-      player_stats: [],
+      overall: [],
+      player_stats_a: [],
+      player_stats_b: [],
       account_name: "",
       error: ""
     };
@@ -56,7 +53,10 @@ export default {
       axios.get("/player_stats/" + this.account_name)
         .then(response => {
           if (response.data.status == "success") {
-            return this.player_stats = response.data.body;
+            this.overall = response.data.body.stats.overall;
+            this.player_stats_a = response.data.body.stats.player_stats[0];
+            this.player_stats_b = response.data.body.stats.player_stats[1];
+
           } else if (response.data.status == "error") {
             return this.error = response.data.body.message;
           }
