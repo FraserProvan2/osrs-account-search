@@ -54,8 +54,8 @@ export default {
         .then(response => {
           if (response.data.status == "success") {
             this.overall = response.data.body.stats.overall;
-            this.player_stats_a = response.data.body.stats.player_stats[0];
-            this.player_stats_b = response.data.body.stats.player_stats[1];
+            this.player_stats_a = response.data.body.stats.splices[0];
+            this.player_stats_b = response.data.body.stats.splices[1];
 
           } else if (response.data.status == "error") {
             return this.error = response.data.body.message;

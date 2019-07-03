@@ -1752,8 +1752,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/player_stats/" + this.account_name).then(function (response) {
         if (response.data.status == "success") {
           _this.overall = response.data.body.stats.overall;
-          _this.player_stats_a = response.data.body.stats.player_stats[0];
-          _this.player_stats_b = response.data.body.stats.player_stats[1];
+          _this.player_stats_a = response.data.body.stats.splices[0];
+          _this.player_stats_b = response.data.body.stats.splices[1];
         } else if (response.data.status == "error") {
           return _this.error = response.data.body.message;
         }

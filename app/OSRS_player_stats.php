@@ -26,36 +26,18 @@ class OSRS_player_stats {
     public static function get_player_stats($username)
     {
         // get users stats
-        $fetched_stats = OSRS_player_stats::get_stats_raw($username);
-
+        $crawled_stats = OSRS_player_stats::get_stats_raw($username);
+        
         // catch if player doesnt exist
-        if (!$fetched_stats) {
-            return array(
-                'status' => 'error',
-                'body' => [
-                    'message' => 'Player ' . $username . ' not found'
-                ]
-            );
-        } else {
-            // process fetched stats
-            $player_stats = (array) OSRS_player_stats::process_stats($fetched_stats);
-            
-            // structure for JS data objects
-            $player_stats_A = array_splice($player_stats, 1, 12);
-            $player_stats_B = array_splice($player_stats, 1);
-            $overall = $player_stats['Overall'];
+        if ($crawled_stats) {
+        
+            // process stats
+            $stats = OSRS_player_stats::process_stats($crawled_stats);
+
+            return $stats;
         }
 
-        return array(
-            'status' => 'success',
-            'body' => [
-                'username' => $username,
-                'stats' => [
-                    'player_stats' => [$player_stats_A,$player_stats_B],
-                    'overall' => $overall
-                ],
-            ]
-        );
+        return false;
     }
 
     /*-------------------------------------------------------------------------
@@ -100,8 +82,8 @@ class OSRS_player_stats {
             return reindex_array($filtered_response);
         }
         
-        // Return empty array to imply no player was found
-        return array();
+        // Return false to imply no player was found
+        return false;
     }
 
     /**
