@@ -55,7 +55,7 @@ class OSRSHelperUnitTest extends TestCase
     {
         // setup
         $functions_responses = $this->functions_to_test();
-
+        
         $stats_to_check = array('Attack', 'Defence', 'Strength', 'Hitpoints', 'Ranged', 'Prayer', 'Magic', 'Cooking', 'Woodcutting', 'Fletching', 'Fishing', 'Firemaking', 'Crafting', 'Smithing', 'Mining', 'Herblore', 'Agility', 'Thieving', 'Slayer', 'Farming', 'Runecraft', 'Hunter', 'Construction');
 
         // test

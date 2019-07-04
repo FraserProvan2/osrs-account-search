@@ -15,7 +15,6 @@
             <div class="container">
 
                 <div class="py-2 mt-2">
-
                     <h3 class="text-center">OSRS Account Look Up</h3>
                 </div>
 
@@ -26,7 +25,6 @@
                         <div class="card">
                             <div class="card-header">Account Look Up</div>
                             <div class="card-body">
-                                {{-- @dump($player_stats) --}}
                                 <account-look-up></account-look-up>
                             </div>
                         </div>

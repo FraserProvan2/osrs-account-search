@@ -13,18 +13,6 @@ class BasicFrontendTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
-    }
-
-    /** @test */
-    public function search_button_is_present()
-    {
-        //
-    }
-
-    /** @test */
-    public function account_name_input_is_present()
-    {
-        //
+        $response->assertOk();
     }
 }
