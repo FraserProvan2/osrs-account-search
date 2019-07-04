@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\OSRS_player_stats;
+use App\RecentSearch;
 
 class MainController extends Controller
 {
     /**
-     * Get players OSRS stats
+     * Loads home page
      *
      * @return View Home
      */
     public function index()
     {
+        // return recent searches
+        
         return view('home');
     }
 
@@ -38,12 +41,19 @@ class MainController extends Controller
                 ]
             );
         } else {
+            // Insert or Updates
+            RecentSearch::insertOrUpdateRecentSearch($username);
+
             $fetched_stats = (array) $fetched_stats;
   
             // proccess spliced/overall structure for JS data objects
             $player_stats_A = array_splice($fetched_stats, 1, 12);
             $player_stats_B = array_splice($fetched_stats, 1);
-            $overall = $fetched_stats['Overall'];
+            
+            $overall = false;
+            if(isset($fetched_stats['Overall'])) {
+                $overall = $fetched_stats['Overall'];
+            } 
 
             return array(
                 'status' => 'success',
@@ -56,11 +66,5 @@ class MainController extends Controller
                 ]
             );
         }
-    }
-
-    /** */ 
-    public function get_recent_searches()
-    {
-        //
     }
 }

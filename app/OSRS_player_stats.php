@@ -102,7 +102,7 @@ class OSRS_player_stats {
         
         // process stats
         foreach ($raw_stats as $key => $stat) {
-            if (!check_for_int($stat)) {
+            if (!check_for_int($stat) && isset($raw_stats[$key + 3])) {
                 $stats[$stat] = [
                     'Rank' => string_to_int($raw_stats[$key + 1]),
                     'Level' => string_to_int($raw_stats[$key + 2]),
