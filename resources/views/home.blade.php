@@ -23,7 +23,7 @@
                     {{-- Player Look Up --}}
                     <div class="col-md-9">
                         <div class="card">
-                            <div class="card-header">Account Look Up</div>
+                            <div class="card-header text-center">Account Look Up</div>
                             <div class="card-body">
                                 <account-look-up></account-look-up>
                             </div>
@@ -31,11 +31,17 @@
                     </div>
 
                     {{-- Recent Searches --}}
-                    <div class="col-md-3">
+                    <div class="col-md-3 text-center">
                         <div class="card h-100">
                             <div class="card-header">Recent Searches</div>
                             <div class="card-body">
-                                //
+                                <ul class="list-group list-group-item-dark">
+                                    @foreach($recent_searches as $search)
+                                        <li class="list-group-item p-1 border-light text-white">
+                                            {{ $search->name }}
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                     </div>

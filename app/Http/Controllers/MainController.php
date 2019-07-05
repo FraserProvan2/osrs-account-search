@@ -16,9 +16,9 @@ class MainController extends Controller
      */
     public function index()
     {
-        // return recent searches
-        
-        return view('home');
+        return view('home', [
+            'recent_searches' => RecentSearch::latest()->take(10)->get()
+        ]);
     }
 
     /**
