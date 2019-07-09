@@ -15,4 +15,12 @@ class BasicFrontendTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /** @test */
+    public function page_with_account_onload_loads_ok()
+    {
+        $response = $this->get('/krun64');
+
+        $response->assertStatus(200);
+    }
 }
