@@ -12,4 +12,5 @@
 */
 
 Route::get('/', 'MainController@index');
+Route::get('/{username}', 'MainController@index');
 Route::get('/player_stats/{username}', 'MainController@get_player_stats');

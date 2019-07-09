@@ -1738,6 +1738,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['onload_account'],
   data: function data() {
     return {
       overall: [],
@@ -1749,12 +1750,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    get_account_stats: function get_account_stats() {
+    get_account_stats: function get_account_stats(account) {
       var _this = this;
 
       this.spinner = 1;
       this.reset_errors();
-      axios.get("/player_stats/" + this.account_name).then(function (response) {
+      axios.get("/player_stats/" + account).then(function (response) {
         if (response.data.status == "success") {
           _this.overall = response.data.body.stats.overall;
           _this.player_stats_a = response.data.body.stats.splices[0];
@@ -1775,6 +1776,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     terminate_spinner: function terminate_spinner() {
       this.spinner = 0;
+    }
+  },
+  mounted: function mounted() {
+    if (this.onload_account) {
+      this.get_account_stats(this.onload_account);
     }
   }
 });
@@ -65943,7 +65949,11 @@ var render = function() {
           {
             staticClass: "btn btn-primary w-100",
             attrs: { type: "button" },
-            on: { click: _vm.get_account_stats }
+            on: {
+              click: function($event) {
+                return _vm.get_account_stats(_vm.account_name)
+              }
+            }
           },
           [_vm._v("Search")]
         )

@@ -25,7 +25,7 @@
                         <div class="card">
                             <div class="card-header text-center">Account Look Up</div>
                             <div class="card-body">
-                                <account-look-up></account-look-up>
+                                <account-look-up onload_account="{{ $onload_account }}"></account-look-up>
                             </div>
                         </div>
                     </div>
@@ -37,8 +37,10 @@
                             <div class="card-body">
                                 <ul class="list-group list-group-item-dark">
                                     @foreach($recent_searches as $search)
-                                        <li class="list-group-item p-1 border-light text-white">
-                                            {{ $search->name }}
+                                        <li class="list-group-item p-1">
+                                            <a class="text-white" href="{{ url('/' . $search->name) }}">
+                                                {{ $search->name }}
+                                            </a>
                                         </li>
                                     @endforeach
                                 </ul>

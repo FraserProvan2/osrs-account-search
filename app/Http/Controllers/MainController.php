@@ -14,10 +14,11 @@ class MainController extends Controller
      *
      * @return View Home
      */
-    public function index()
+    public function index($account = false)
     {
         return view('home', [
-            'recent_searches' => RecentSearch::latest()->take(10)->get()
+            'recent_searches' => RecentSearch::latest()->take(10)->get(),
+            'onload_account' => $account,
         ]);
     }
 
@@ -41,6 +42,7 @@ class MainController extends Controller
                 ]
             );
         } else {
+
             // Insert or Updates
             RecentSearch::insertOrUpdateRecentSearch($username);
 

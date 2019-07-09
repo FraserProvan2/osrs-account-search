@@ -6,7 +6,7 @@
         <input class="form-control" type="text" placeholder="Account Name" v-model="account_name" />
       </div>
       <div class="col-md-3">
-        <button type="button" class="btn btn-primary w-100" @click="get_account_stats">Search</button>
+        <button type="button" class="btn btn-primary w-100" @click="get_account_stats(account_name)">Search</button>
       </div>
     </div>
 
@@ -34,12 +34,13 @@
         <stats-list :player_data="player_stats_b"></stats-list>
       </div>
     </div>
-    
+
   </div>
 </template>
 
 <script>
 export default {
+  props: ['onload_account'],
   data() {
     return {
       overall: [],
@@ -51,11 +52,11 @@ export default {
     };
   },
   methods: {
-    get_account_stats() {
+    get_account_stats(account) {
       this.spinner = 1;
       this.reset_errors();
 
-      axios.get("/player_stats/" + this.account_name)
+      axios.get("/player_stats/" + account)
         .then(response => {
           if (response.data.status == "success") {
             this.overall = response.data.body.stats.overall;
@@ -77,6 +78,11 @@ export default {
     terminate_spinner(){
       this.spinner = 0;
     },
-  }
+  },
+  mounted() {
+    if (this.onload_account) {
+      this.get_account_stats(this.onload_account);
+    }
+  },
 };
 </script>

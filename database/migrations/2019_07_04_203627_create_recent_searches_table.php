@@ -16,7 +16,7 @@ class CreateRecentSearchesTable extends Migration
         Schema::create('recent_searches', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');	
-            $table->integer('searches')->default(0);
+            $table->integer('searches')->default(1);
             $table->timestamps();
         });
     }
