@@ -8,6 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GetPlayerStatsTest extends TestCase
 {
+    use RefreshDatabase;
+    
     /** @test */
     public function ensure_stats_are_returned()
     {

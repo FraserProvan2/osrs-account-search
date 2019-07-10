@@ -8,11 +8,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BasicFrontendTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function page_loads_ok()
     {
         $response = $this->get('/');
-
+   
         $response->assertStatus(200);
     }
 
