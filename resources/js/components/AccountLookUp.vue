@@ -3,10 +3,10 @@
     <!-- Account Input -->
     <div class="row mb-2">
       <div class="col-md-9">
-        <input class="form-control" type="text" placeholder="Account Name" v-model="account_name" />
+        <input class="form-control" type="text" placeholder="Account Name" v-model="input_name" />
       </div>
       <div class="col-md-3">
-        <button type="button" class="btn btn-primary w-100" @click="get_account_stats(account_name)">Search</button>
+        <button type="button" class="btn btn-primary w-100" @click="get_account_stats(input_name)">Search</button>
       </div>
     </div>
 
@@ -23,7 +23,30 @@
     </div>
 
     <!-- Overll -->
-
+    <div class="row my-3" v-if="this.player_name">
+      <div class="col-md-6">
+        <h3 class="text-center my-3">
+          <span class="badge badge-primary py-2 mr-1" style="font-size: 1.5rem!important;width: 46px; height: 43px;">
+            {{ this.player_grade }}
+          </span>
+          <span class="h4 mb-1">{{ this.player_name }}</span>
+        </h3>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <small class="text-muted">Total Level: </small>
+          <span class="h4">{{ this.overall.Level }}</span>
+        </div>
+        <div>
+          <small class="text-muted">Rank: </small>
+          {{ this.overall.Rank }}
+        </div>
+        <div>
+          <small class="text-muted">Total XP: </small>
+          {{ this.overall.XP }}
+        </div>
+      </div>
+    </div>
 
     <!-- Stats -->
     <div v-if="this.player_stats_a && this.player_stats_b && spinner === 0" class="row">
@@ -43,10 +66,12 @@ export default {
   props: ['onload_account'],
   data() {
     return {
+      player_name: "",
       overall: [],
+      player_grade: "",
       player_stats_a: [],
       player_stats_b: [],
-      account_name: "",
+      input_name: "",
       spinner: 0,
       error: ""
     };
@@ -59,9 +84,12 @@ export default {
       axios.get("/player_stats/" + account)
         .then(response => {
           if (response.data.status == "success") {
+            // set player data
+            this.player_name = response.data.body.username;
             this.overall = response.data.body.stats.overall;
             this.player_stats_a = response.data.body.stats.splices[0];
             this.player_stats_b = response.data.body.stats.splices[1];
+
           } else if (response.data.status == "error") {
             this.error = response.data.body.message;
           }
@@ -72,6 +100,9 @@ export default {
           this.terminate_spinner();
         });
     },
+    rank_player_account(player_level){
+      return 'B';
+    },
     reset_errors() {
       return (this.error = "");
     },
@@ -80,9 +111,13 @@ export default {
     },
   },
   mounted() {
+    // autoload player stats with vue
     if (this.onload_account) {
       this.get_account_stats(this.onload_account);
     }
+
+    // work out account grade
+    this.player_grade = this.rank_player_account(this.overall.Level);
   },
 };
 </script>

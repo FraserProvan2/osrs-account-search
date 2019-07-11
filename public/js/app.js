@@ -1737,14 +1737,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['onload_account'],
   data: function data() {
     return {
+      player_name: "",
       overall: [],
+      player_grade: "",
       player_stats_a: [],
       player_stats_b: [],
-      account_name: "",
+      input_name: "",
       spinner: 0,
       error: ""
     };
@@ -1757,6 +1782,8 @@ __webpack_require__.r(__webpack_exports__);
       this.reset_errors();
       axios.get("/player_stats/" + account).then(function (response) {
         if (response.data.status == "success") {
+          // set player data
+          _this.player_name = response.data.body.username;
           _this.overall = response.data.body.stats.overall;
           _this.player_stats_a = response.data.body.stats.splices[0];
           _this.player_stats_b = response.data.body.stats.splices[1];
@@ -1771,6 +1798,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.terminate_spinner();
       });
     },
+    rank_player_account: function rank_player_account(player_level) {
+      return 'B';
+    },
     reset_errors: function reset_errors() {
       return this.error = "";
     },
@@ -1779,9 +1809,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    // autoload player stats with vue
     if (this.onload_account) {
       this.get_account_stats(this.onload_account);
-    }
+    } // work out account grade
+
+
+    this.player_grade = this.rank_player_account(this.overall.Level);
   }
 });
 
@@ -65925,19 +65959,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.account_name,
-              expression: "account_name"
+              value: _vm.input_name,
+              expression: "input_name"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "text", placeholder: "Account Name" },
-          domProps: { value: _vm.account_name },
+          domProps: { value: _vm.input_name },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.account_name = $event.target.value
+              _vm.input_name = $event.target.value
             }
           }
         })
@@ -65951,7 +65985,7 @@ var render = function() {
             attrs: { type: "button" },
             on: {
               click: function($event) {
-                return _vm.get_account_stats(_vm.account_name)
+                return _vm.get_account_stats(_vm.input_name)
               }
             }
           },
@@ -65987,6 +66021,59 @@ var render = function() {
           ],
           1
         )
+      : _vm._e(),
+    _vm._v(" "),
+    this.player_name
+      ? _c("div", { staticClass: "row my-3" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("h3", { staticClass: "text-center my-3" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "badge badge-primary py-2 mr-1",
+                  staticStyle: {
+                    "font-size": "1.5rem!important",
+                    width: "46px",
+                    height: "43px"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n          " + _vm._s(this.player_grade) + "\n        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "h4 mb-1" }, [
+                _vm._v(_vm._s(this.player_name))
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", [
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("Total Level: ")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "h4" }, [
+                _vm._v(_vm._s(this.overall.Level))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("small", { staticClass: "text-muted" }, [_vm._v("Rank: ")]),
+              _vm._v("\n        " + _vm._s(this.overall.Rank) + "\n      ")
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("Total XP: ")
+              ]),
+              _vm._v("\n        " + _vm._s(this.overall.XP) + "\n      ")
+            ])
+          ])
+        ])
       : _vm._e(),
     _vm._v(" "),
     this.player_stats_a && this.player_stats_b && _vm.spinner === 0

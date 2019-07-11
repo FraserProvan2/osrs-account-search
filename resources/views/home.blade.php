@@ -21,7 +21,7 @@
                 <div class="row">
 
                     {{-- Player Look Up --}}
-                    <div class="col-md-9">
+                    <div class="col-md-9 mb-2">
                         <div class="card">
                             <div class="card-header text-center">Account Look Up</div>
                             <div class="card-body">
@@ -31,7 +31,7 @@
                     </div>
 
                     {{-- Recent Searches --}}
-                    <div class="col-md-3 text-center">
+                    <div class="col-md-3 text-center mb-2">
                         <div class="card h-100">
                             <div class="card-header">Recent Searches</div>
                             <div class="card-body">

@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class GetPlayerStatsTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /** @test */
     public function ensure_stats_are_returned()
     {
@@ -30,11 +30,11 @@ class GetPlayerStatsTest extends TestCase
     public function ensure_expected_error_for_invalid_accounts()
     {
         $this->get("/player_stats/invalidaccountname")
-        ->assertJson([
-            "status" => "error",
-            "body" => [
-                "message" => "Player invalidaccountname not found"
-            ]
-        ]);
+            ->assertJson([
+                "status" => "error",
+                "body" => [
+                    "message" => "Player invalidaccountname not found"
+                ]
+            ]);
     }
 }
