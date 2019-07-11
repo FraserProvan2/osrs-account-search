@@ -1766,7 +1766,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       player_name: "",
       overall: [],
-      player_grade: "",
+      player_grade: {
+        letter: "",
+        className: ""
+      },
       player_stats_a: [],
       player_stats_b: [],
       input_name: "",
@@ -1787,6 +1790,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.overall = response.data.body.stats.overall;
           _this.player_stats_a = response.data.body.stats.splices[0];
           _this.player_stats_b = response.data.body.stats.splices[1];
+
+          _this.rank_player_account(_this.overall.Level);
         } else if (response.data.status == "error") {
           _this.error = response.data.body.message;
         }
@@ -1799,7 +1804,25 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     rank_player_account: function rank_player_account(player_level) {
-      return 'B';
+      if (player_level > 2200) {
+        this.player_grade.letter = "A";
+        this.player_grade.className = "badge-success";
+      } else if (player_level < 2200 && player_level > 1500) {
+        this.player_grade.letter = "B";
+        this.player_grade.className = "badge-warning";
+      } else if (player_level < 2200 && player_level > 1500) {
+        this.player_grade.letter = "C";
+        this.player_grade.className = "badge-warning";
+      } else if (player_level < 1500 && player_level > 1000) {
+        this.player_grade.letter = "D";
+        this.player_grade.className = "badge-success";
+      } else if (player_level < 1000 && player_level > 500) {
+        this.player_grade.letter = "E";
+        this.player_grade.className = "badge-danger";
+      } else if (player_level < 500) {
+        this.player_grade.letter = "F";
+        this.player_grade.className = "badge-danger";
+      }
     },
     reset_errors: function reset_errors() {
       return this.error = "";
@@ -1812,10 +1835,7 @@ __webpack_require__.r(__webpack_exports__);
     // autoload player stats with vue
     if (this.onload_account) {
       this.get_account_stats(this.onload_account);
-    } // work out account grade
-
-
-    this.player_grade = this.rank_player_account(this.overall.Level);
+    }
   }
 });
 
@@ -66023,14 +66043,15 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    this.player_name
-      ? _c("div", { staticClass: "row my-3" }, [
+    this.player_name && this.spinner === 0
+      ? _c("div", { staticClass: "row justify-content-md-center my-3" }, [
           _c("div", { staticClass: "col-md-6" }, [
             _c("h3", { staticClass: "text-center my-3" }, [
               _c(
                 "span",
                 {
-                  staticClass: "badge badge-primary py-2 mr-1",
+                  staticClass: "badge py-2 mr-1",
+                  class: this.player_grade.className,
                   staticStyle: {
                     "font-size": "1.5rem!important",
                     width: "46px",
@@ -66039,7 +66060,9 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n          " + _vm._s(this.player_grade) + "\n        "
+                    "\n          " +
+                      _vm._s(this.player_grade.letter) +
+                      "\n        "
                   )
                 ]
               ),
@@ -66050,7 +66073,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "col-md-6 text-center" }, [
             _c("div", [
               _c("small", { staticClass: "text-muted" }, [
                 _vm._v("Total Level: ")

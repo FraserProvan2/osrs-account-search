@@ -17,7 +17,7 @@ class MainController extends Controller
     public function index($account = false)
     {
         return view('home', [
-            'recent_searches' => RecentSearch::latest()->take(15)->get(),
+            'recent_searches' => RecentSearch::latest()->take(17)->get(),
             'onload_account' => $account,
         ]);
     }

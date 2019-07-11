@@ -23,16 +23,16 @@
     </div>
 
     <!-- Overll -->
-    <div class="row my-3" v-if="this.player_name">
+    <div class="row justify-content-md-center my-3" v-if="this.player_name && this.spinner === 0">
       <div class="col-md-6">
         <h3 class="text-center my-3">
-          <span class="badge badge-primary py-2 mr-1" style="font-size: 1.5rem!important;width: 46px; height: 43px;">
-            {{ this.player_grade }}
+          <span class="badge py-2 mr-1" :class="this.player_grade.className" style="font-size: 1.5rem!important;width: 46px; height: 43px;">
+            {{ this.player_grade.letter }}
           </span>
           <span class="h4 mb-1">{{ this.player_name }}</span>
         </h3>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 text-center">
         <div>
           <small class="text-muted">Total Level: </small>
           <span class="h4">{{ this.overall.Level }}</span>
@@ -68,7 +68,10 @@ export default {
     return {
       player_name: "",
       overall: [],
-      player_grade: "",
+      player_grade: {
+        letter: "",
+        className: ""
+      },
       player_stats_a: [],
       player_stats_b: [],
       input_name: "",
@@ -90,6 +93,7 @@ export default {
             this.player_stats_a = response.data.body.stats.splices[0];
             this.player_stats_b = response.data.body.stats.splices[1];
 
+            this.rank_player_account(this.overall.Level);
           } else if (response.data.status == "error") {
             this.error = response.data.body.message;
           }
@@ -101,7 +105,30 @@ export default {
         });
     },
     rank_player_account(player_level){
-      return 'B';
+      if (player_level > 2200) {
+        this.player_grade.letter = "A"
+        this.player_grade.className = "badge-success"
+      }
+      else if (player_level < 2200 && player_level > 1500) {
+        this.player_grade.letter = "B"
+        this.player_grade.className = "badge-warning"
+      }
+      else if (player_level < 2200 && player_level > 1500) {
+        this.player_grade.letter = "C"
+        this.player_grade.className = "badge-warning"
+      }
+      else if (player_level < 1500 && player_level > 1000) {
+        this.player_grade.letter = "D"
+        this.player_grade.className = "badge-success"
+      }
+      else if (player_level < 1000 && player_level > 500) {
+        this.player_grade.letter = "E"
+        this.player_grade.className = "badge-danger"
+      }
+      else if (player_level < 500) {
+        this.player_grade.letter = "F"
+        this.player_grade.className = "badge-danger"
+      }
     },
     reset_errors() {
       return (this.error = "");
@@ -115,9 +142,6 @@ export default {
     if (this.onload_account) {
       this.get_account_stats(this.onload_account);
     }
-
-    // work out account grade
-    this.player_grade = this.rank_player_account(this.overall.Level);
   },
 };
 </script>
