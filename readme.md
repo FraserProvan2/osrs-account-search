@@ -145,7 +145,7 @@ The Vue.js frontend uses axios to asynchronously call OSRS_player_stats, process
 ### Installation ###
 1. Clone repository 
 2. In the terminal, run `Composer Install` to install dependencies
-3. Run `npm run dev` to build scss/js
+3. Run `npm install`, and then `npm run dev` to build scss/js
 4. Set up DB, configure DB mysql settings in .env (Host, Username, Password), you can use .env.example as a template by removing `.example` from the filename
 5. In the terminal, run `php artisan migrate --seed` to run DB migrations and seed
 
