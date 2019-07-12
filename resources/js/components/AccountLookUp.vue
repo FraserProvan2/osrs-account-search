@@ -111,7 +111,7 @@ export default {
       }
       else if (player_level < 2200 && player_level > 1500) {
         this.player_grade.letter = "B"
-        this.player_grade.className = "badge-warning"
+        this.player_grade.className = "badge-success"
       }
       else if (player_level < 2200 && player_level > 1500) {
         this.player_grade.letter = "C"
@@ -119,7 +119,7 @@ export default {
       }
       else if (player_level < 1500 && player_level > 1000) {
         this.player_grade.letter = "D"
-        this.player_grade.className = "badge-success"
+        this.player_grade.className = "badge-warning"
       }
       else if (player_level < 1000 && player_level > 500) {
         this.player_grade.letter = "E"

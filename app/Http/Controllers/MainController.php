@@ -33,7 +33,7 @@ class MainController extends Controller
     {
         // get player stats using OSRS player stats crawler
         $fetched_stats = OSRS_player_stats::get_player_stats($username);
-      
+
         if(!$fetched_stats) {
             return array(
                 'status' => 'error',
