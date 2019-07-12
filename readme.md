@@ -1,7 +1,7 @@
 ## Old School RuneScape Account Search ##
 
 ### About ###
-The OSRS Account Search is a simple application that displays Old School RuneScape player stats and levels, built using Laravel 5.8 and Vue.js. 
+The OSRS Account Search is a web app that looks up Old School RuneScape player stats and levels, built using Laravel 5.8 and Vue.js. 
 
 [OSRS_player_stats](https://github.com/FraserProvan2/OSRS_account_search/blob/master/app/OSRS_player_stats.php) is a class that crawls the official OSRS Highscores page, processes and returns the data as a PHP array. This class includes its required utility methods, so it can be reused in other projects. 
 
